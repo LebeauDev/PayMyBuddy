@@ -1,38 +1,68 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
- 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<title>Login</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/main.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
- 
+
 <body>
-	
+
 	<div class="container">
-	<br/><br/>
-		
-		<form th:action="@{/loginPage}" method="POST" class="form-signin" style="width:30%;margin:auto">
-			<h3 class="form-signin-heading">MY LOGIN PAGE</h3>
-			
-			<br/>
-			
-			 <div align="center" th:if="${param.error}">
+		<br /><br />
+
+		<form th:action="@{/loginPage}" method="POST" class="form-signin" style="width:30%;margin:auto; text-align:center
+		">
+
+			<img src="/logoPayMyBuddy.png">
+
+			<br />
+			<br />
+
+			<div align="center" th:if="${param.error}">
 				<p style="font-size: 20; color: #FF1C19;">Username or password is invalid</p>
 			</div>
-			
-			<input type="text" id="username" name="username"  placeholder="Username or email"
-				class="form-control" /> <br/> 
-			<input type="password"  placeholder="Password"
-				id="password" name="password" class="form-control" /> <br />
-				
-			
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+
+			<input type="text" id="username" name="username" placeholder="Email" class="form-control" /> <br />
+			<br />
+			<input type="password" placeholder="Password" id="password" name="password" class="form-control" /> <br />
+
+			<br />
+
+			<input type="checkbox"> Remember me
+
+			<br /><br /><br /><br /><br />
+
+			<button class="btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
+				th:text="Login"></button>
+			<br />
 		</form>
-		
-		
+
+
 	</div>
 </body>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+
+<script>
+	
+	$(document).ready(function () {
+		$('#datatable1').DataTable({
+			"pageLength": 4, 
+		}
+			
+		);
+		
+	});
+</script>
+
 </html>

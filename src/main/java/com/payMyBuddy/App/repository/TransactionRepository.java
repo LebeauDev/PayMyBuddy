@@ -18,4 +18,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long>{
 	
 	List<Transaction> findByEmetteur(@Param("emetteur") int emetteur);
 
+
 }

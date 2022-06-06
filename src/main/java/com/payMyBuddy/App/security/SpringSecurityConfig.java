@@ -36,7 +36,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		System.out.print("############### config http");
-		http.authorizeRequests().antMatchers("/loginPage", "/list","/").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/loginPage")
+		http.authorizeRequests().antMatchers("/**","/loginPage", "/list","/").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/loginPage")
 				.defaultSuccessUrl("/showTransaction").failureUrl("/loginPage?error=true").permitAll()
 				.and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/loginPage"); 
 		

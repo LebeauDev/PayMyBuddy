@@ -29,20 +29,29 @@ public class ContactController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		User userCurrent = uRepo.findByEmail(authentication.getName()).get(0);
-		
-		List<Connection> listConnection = conRepo.findByIdemetteur(userCurrent.getId());
-		
-		List<User> userList = new ArrayList<User>();
-		
-		for(Connection connection :  listConnection ) {
-			int id = connection.getIdDestinataire();
-			User user = uRepo.getById(id);
-			userList.add(user);
+		try {
+			User userCurrent = uRepo.findByEmail(authentication.getName()).get(0);
+			
+			
+			
+			List<Connection> listConnection = conRepo.findByIdemetteur(userCurrent.getId());
+			
+			List<User> userList = new ArrayList<User>();
+			
+			for(Connection connection :  listConnection ) {
+				int id = connection.getIdDestinataire();
+				User user = uRepo.getById(id);
+				userList.add(user);
+			}
+			
+			
+			mav.addObject("connections", userList);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		
-		mav.addObject("connections", userList);
 
 		return mav;
 	}

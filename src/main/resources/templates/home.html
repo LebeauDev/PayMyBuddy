@@ -6,27 +6,41 @@
 	<link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/main.css">
 
 </head>
 
 <body>
 	<header>
-	<span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <form id="logoutForm" method="POST" th:action="@{/logout}">
-		            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		            
-		        </form>
-		         <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-            </span>
-            
-            <a href="/contact">Contact</a>
-            <a href="/">Home</a>
-            <a href="/showTransaction">Transaction</a>
-            <a href="/profile">Profile</a>
-            
+		<img src="/logoPayMyBuddy.png">
+		
+		<ul>	
+		<li><a href="/">Home</a></li>
+		
+		<li><a href="/showTransaction">Transfert</a></li>
+		
+		<li><a href="/profile">Profile</a></li>
+		
+		<li><a href="/contact">Contact</a></li>
+		
+
+
+
+		<li sec:authorize="isAuthenticated()">
+
+			<form id="logoutForm" method="POST" th:action="@{/logout}">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+			</form>
+			<a href="" onclick="document.forms['logoutForm'].submit()">Logout</a>
+		</li>
+		</ul>
+
 	</header>
+	
+	<div class="sousmenu">
+		
 	
 </body>
 

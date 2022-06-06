@@ -46,7 +46,7 @@ public class TransactionController {
 	
 	@GetMapping({"/showTransaction"})
 	public ModelAndView showUsers(HttpSession session) {
-		ModelAndView mav = new ModelAndView("list-transactions");
+		ModelAndView mav = new ModelAndView("list-transaction-test");
 		//List<Transaction> listTransaction = tRepo.findAll();
 		int id = -1;
 		
@@ -85,13 +85,14 @@ public class TransactionController {
 		String destinataire  = transactionForm.getDestinataire();
 		Float montant = transactionForm.getMontant();
 		String description = transactionForm.getDescription();
+		
 		int id = -1;
 		if(userCurrent!=null) {
 			
 			id = userCurrent.getId();
 		}
 		
-		if(montant<0) {
+		if(montant<=0) {
 			return "redirect:/showTransaction?error=1";
 		}
 		
