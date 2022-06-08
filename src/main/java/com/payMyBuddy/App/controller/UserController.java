@@ -23,13 +23,13 @@ import com.payMyBuddy.App.repository.UserRepository;
 @Controller
 public class UserController {
 
-	@Autowired
-	private UserService uService;
 
 	@GetMapping("/loginPage")
 	public String login() {
 
 		return "login";
 	}
+	
+	
 
 }

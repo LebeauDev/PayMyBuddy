@@ -28,14 +28,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Autowired
 	 private UserDetailsService userDetailsService;
 
-
-	// roles admin allow to access /admin/**
-	// roles user allow to access /user/**
-	// custom 403 access denied handler
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		System.out.print("############### config http");
+	
 		http.authorizeRequests().antMatchers("/**","/loginPage", "/list","/").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/loginPage")
 				.defaultSuccessUrl("/showTransaction").failureUrl("/loginPage?error=true").permitAll()
 				.and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/loginPage"); 
@@ -46,36 +41,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	 @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		 //System.out.println("################ ICI AUTH");
         auth.userDetailsService( userDetailsService).passwordEncoder(passwordEncoder());
     }
 	 
 	 
-    
-	
-	
-	/*
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		System.out.print("############### config auth");
-		auth.inMemoryAuthentication()
-			.withUser("springuser").password(passwordEncoder().encode("spring123"))
-			.roles("USER")
-			.and()
-			.withUser("springadmin").password(passwordEncoder().encode("admin123"))
-			.roles("ADMIN", "USER");
-	
-	}
-	
-		/*
-	// create two users, admin and user
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
-
-	}
-	*/
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {

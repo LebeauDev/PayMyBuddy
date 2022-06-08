@@ -33,13 +33,13 @@ public class ConnectionService {
 		// listeUtilsateur.get(0) pour avoir l'utilisateur à ajouter
 		
 		
-		//User userCurrent = uRepo.findByEmail(emailBDD).get(0);
+		
 		//recupere id utilisateur session
 		int id = -1;
 		String currentEmail = "";
 		
 		if(userCurrent!=null) {
-			//System.out.println(((User)session.getAttribute("user")).getId());
+			
 			id = userCurrent.getId();
 			 currentEmail = userCurrent.getEmail();
 		}
@@ -51,12 +51,12 @@ public class ConnectionService {
 		}
 		
 		Connection con = new Connection();
-		// con.setIdEmetteur(id)...
+		
 		List<User> listUtilisateur = uRepo.findByEmail(email);
 		con.setIdDestinataire(listUtilisateur.get(0).getId());
 		con.setIdEmetteur(id);
 		con.setNom(listUtilisateur.get(0).getNom());
-		//conRepo.save(con)
+		
 		
 		cRepo.save(con);
 	}

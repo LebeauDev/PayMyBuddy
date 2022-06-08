@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.payMyBuddy.App.Service.CompteService;
 import com.payMyBuddy.App.Service.ConnectionService;
 import com.payMyBuddy.App.Service.TransactionService;
+import com.payMyBuddy.App.Service.UserService;
 import com.payMyBuddy.App.entity.Compte;
 import com.payMyBuddy.App.entity.Connection;
 import com.payMyBuddy.App.entity.Transaction;
@@ -40,22 +41,24 @@ public class TransactionController {
 	
 	@Autowired
 	private CompteService coServ;
+
 	
 	@Autowired
-	UserRepository uRepo;
+	UserService uServ;
+	
 	
 	@GetMapping({"/showTransaction"})
-	public ModelAndView showUsers(HttpSession session) {
+	public ModelAndView showUsers() {
 		ModelAndView mav = new ModelAndView("list-transaction-test");
-		//List<Transaction> listTransaction = tRepo.findAll();
+		
 		int id = -1;
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email =  authentication.getName();
 		
-		//System.out.println("@@@@@@@@@@@@@@@@@@@"+ email);
 		
-		User userCurrent = uRepo.findByEmail(email).get(0);
+		
+		User userCurrent = uServ.getuRepo().findByEmail(email).get(0);
 		
 		if(userCurrent!=null) {
 			
@@ -80,7 +83,7 @@ public class TransactionController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		User userCurrent = uRepo.findByEmail(authentication.getName()).get(0);
+		User userCurrent = uServ.getuRepo().findByEmail(authentication.getName()).get(0);
 
 		String destinataire  = transactionForm.getDestinataire();
 		Float montant = transactionForm.getMontant();
@@ -95,11 +98,6 @@ public class TransactionController {
 		if(montant<=0) {
 			return "redirect:/showTransaction?error=1";
 		}
-		
-		
-		
-		
-		
 		
 		
 		String resultat = transService.createTransaction(id, montant, destinataire, description);

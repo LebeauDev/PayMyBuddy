@@ -32,9 +32,6 @@ public class ProfilController {
 			
 			return mav;
 		}
-		//Recup userCurrnent
-		// envoie userCurnent à mav
-		// dans profile.html afficher les infos de userCurrent
 		
 	}
 
